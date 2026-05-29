@@ -45,6 +45,16 @@ public final class ContentNode {
         this.rrf = rrf;
     }
 
+    /** Expose the segment for out-of-band tombstone application. */
+    public UnifiedSegment segment() {
+        return segment;
+    }
+
+    /** Alias for {@link #segment()} used by the cluster wrapper. */
+    public UnifiedSegment segmentForTombstone() {
+        return segment;
+    }
+
     public ShardResult execute(Query query) {
         // 1. ACL bitset
         AclBitsetBuilder aclBuilder = new AclBitsetBuilder(segment.invertedIndex());

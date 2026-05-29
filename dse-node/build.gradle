@@ -1,0 +1,17 @@
+// dse-node — end-to-end integration of the whole architecture in
+// one process. Indexer → segment → ContentNode → Broker → result.
+//
+// This is the test harness that proves the architecture's invariants:
+// document-partitioned sharding, unified-segment retrieval, ACL pre-
+// filter, RRF cross-shard merge, and tombstone semantics all compose.
+
+dependencies {
+    api project(':dse-common')
+    api project(':dse-segment')
+    api project(':dse-hnsw')
+    api project(':dse-shard')
+    api project(':dse-broker')
+    api project(':dse-indexer')
+    api project(':dse-tier')
+    api project(':dse-metrics')
+}

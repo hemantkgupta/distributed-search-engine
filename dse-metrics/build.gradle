@@ -1,0 +1,10 @@
+// dse-metrics — minimal counters + histograms.
+//
+// Production engines export to Prometheus / OpenTelemetry. This module
+// provides the in-process counter, gauge, and histogram primitives that
+// the per-shard and broker layers would expose: latency, merge IO,
+// recall, partial-result rate, etc.
+
+dependencies {
+    api project(':dse-common')
+}

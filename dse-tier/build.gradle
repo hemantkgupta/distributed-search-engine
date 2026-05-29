@@ -1,0 +1,15 @@
+// dse-tier — Tier-1 / Tier-2 routing classifier.
+//
+// At the broker, per-query intent classification decides which shards
+// to hit: the small head Tier-1 (absorbs ~80% of QPS) or the wider
+// Tier-2 tail. Without tiering, 10 000-shard fan-out is infeasible at
+// 1M QPS — see patterns/tiered-shard-serving.md.
+//
+// Production classifiers are small learned models over query features.
+// This module implements a feature-rule classifier that captures the
+// intent of the production model without the training pipeline.
+
+dependencies {
+    api project(':dse-common')
+    api project(':dse-shard')
+}

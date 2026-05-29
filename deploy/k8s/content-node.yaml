@@ -1,0 +1,65 @@
+# Content-node StatefulSet — one pod per shard replica.
+#
+# The content node owns one shard's unified segment family (inverted +
+# HNSW + ColBERT tokens + forward + tombstones). Resource requests are
+# sized for the ~130 GB resident working set from the capacity math.
+apiVersion: apps/v1
+kind: StatefulSet
+metadata:
+  name: dse-content-node
+  labels:
+    app: dse-content-node
+spec:
+  serviceName: dse-content-node
+  replicas: 3
+  selector:
+    matchLabels:
+      app: dse-content-node
+  template:
+    metadata:
+      labels:
+        app: dse-content-node
+    spec:
+      containers:
+        - name: content-node
+          image: hkg/dse-content-node:0.1.0
+          ports:
+            - name: grpc
+              containerPort: 7090
+          resources:
+            requests:
+              memory: "192Gi"
+              cpu: "16"
+            limits:
+              memory: "256Gi"
+              cpu: "32"
+          env:
+            - name: JAVA_OPTS
+              value: "-XX:+UseZGC -Xmx150g"
+            - name: SHARD_ID
+              valueFrom:
+                fieldRef:
+                  fieldPath: metadata.name
+          volumeMounts:
+            - name: segment-cache
+              mountPath: /var/dse/segments
+  volumeClaimTemplates:
+    - metadata:
+        name: segment-cache
+      spec:
+        accessModes: ["ReadWriteOnce"]
+        resources:
+          requests:
+            storage: 4Ti
+---
+apiVersion: v1
+kind: Service
+metadata:
+  name: dse-content-node
+spec:
+  clusterIP: None  # headless service for StatefulSet
+  selector:
+    app: dse-content-node
+  ports:
+    - name: grpc
+      port: 7090

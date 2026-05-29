@@ -22,4 +22,7 @@ include 'dse-shard'
 include 'dse-broker'
 include 'dse-indexer'
 
-// Phase 4 — Ops + integration (planned)
+// Phase 4 — Ops + integration
+include 'dse-metrics'
+include 'dse-tier'
+include 'dse-node'
