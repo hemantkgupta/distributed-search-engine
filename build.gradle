@@ -1,0 +1,59 @@
+// Root build for distributed-search-engine.
+//
+// Per-module dependency wiring is appended to this file as the phase
+// plan resolves which modules exist. The skeleton below establishes
+// the all-projects defaults that every module inherits.
+
+allprojects {
+    group = 'com.hkg.distributedsearchengine'  // e.g. com.hkg.distributedgoogledrivelike
+    version = '0.1.0-SNAPSHOT'
+
+    repositories {
+        mavenCentral()
+    }
+}
+
+subprojects {
+    apply plugin: 'java-library'
+
+    java {
+        sourceCompatibility = JavaVersion.VERSION_17
+        targetCompatibility = JavaVersion.VERSION_17
+    }
+
+    dependencies {
+        testImplementation platform('org.junit:junit-bom:5.10.2')
+        testImplementation 'org.junit.jupiter:junit-jupiter'
+        testImplementation 'org.assertj:assertj-core:3.25.3'
+        testRuntimeOnly  'org.junit.platform:junit-platform-launcher'
+    }
+
+    test {
+        useJUnitPlatform()
+    }
+
+    compileJava.options.encoding     = 'UTF-8'
+    compileTestJava.options.encoding = 'UTF-8'
+}
+
+// =====================================================================
+// Module dependency graph
+// =====================================================================
+// Each `project(':<module>') { dependencies { ... } }` block is added
+// here as the phase plan introduces the module. Keep the comment
+// taxonomy in sync with the phase rubric so a reader can see at a
+// glance which plane / pillar each module belongs to.
+
+// Example shape (replace with topic-specific modules):
+//
+// project(':dse-common') {
+//     dependencies {
+//         // foundational types only
+//     }
+// }
+//
+// project(':dse-<<<pillar1>>>') {
+//     dependencies {
+//         api project(':dse-common')
+//     }
+// }

@@ -1,0 +1,16 @@
+// dse-inverted — the inverted index assembling FST term dictionary,
+// PFOR-Delta posting lists, BM25 scoring, and Block-Max WAND pruning.
+//
+// This is the lexical first stage of the two-stage retrieval pipeline.
+// Returns a sorted top-K of (doc-ID, BM25 score) for a multi-term query,
+// optionally restricted to an authorised-doc bitset.
+//
+// See concepts/inverted-index.md, concepts/bm25.md,
+// concepts/block-max-wand.md, and concepts/pfor-delta-encoding.md.
+
+dependencies {
+    api project(':dse-common')
+    api project(':dse-fst')
+    api project(':dse-pfor')
+    api project(':dse-roaring')
+}

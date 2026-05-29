@@ -1,0 +1,16 @@
+// dse-fst — term-dictionary structure inspired by Lucene's
+// Finite State Transducer.
+//
+// Production FSTs are minimal deterministic acyclic finite automata with
+// outputs; lookup is O(|term|) and memory is much smaller than a hash map
+// because shared prefixes (and suffixes, via minimisation) are factored.
+//
+// This module implements a simplified Trie-shaped variant — same lookup
+// semantics, simpler structure, easier to reason about. Production engines
+// use the full Lucene FST encoded as a byte array.
+//
+// See concepts/finite-state-transducer.md for the architectural rationale.
+
+dependencies {
+    api project(':dse-common')
+}

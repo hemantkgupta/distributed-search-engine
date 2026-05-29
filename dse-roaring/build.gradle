@@ -1,0 +1,19 @@
+// dse-roaring — minimal Roaring-style sparse bitset used as the
+// universal "sparse set of doc-IDs" primitive.
+//
+// Production engines use the full Roaring library
+// (https://github.com/RoaringBitmap/RoaringBitmap). This module is a
+// simplified reimplementation that captures the algorithmic essentials:
+// chunked storage with per-chunk container-type selection, fast
+// intersection / union, O(1) membership.
+//
+// In the unified search engine, Roaring is used for:
+//   * tombstone bitsets (per-segment deleted doc-IDs)
+//   * ACL bitsets (per-query authorised doc-IDs from OR of ACL postings)
+//   * BMW candidate-set tracking
+//
+// See concepts/roaring-bitmap.md for the architectural rationale.
+
+dependencies {
+    api project(':dse-common')
+}

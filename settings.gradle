@@ -1,0 +1,10 @@
+rootProject.name = 'distributed-search-engine'
+
+// Foundational
+include 'dse-common'
+
+// Phase 1 — Lexical retrieval primitives
+include 'dse-roaring'
+include 'dse-pfor'
+include 'dse-fst'
+include 'dse-inverted'

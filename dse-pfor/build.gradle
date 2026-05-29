@@ -1,0 +1,17 @@
+// dse-pfor — simplified PFOR-Delta posting-list codec.
+//
+// The posting list is broken into fixed-size blocks (here, 128 doc-IDs).
+// Each block is delta-encoded (each value = previous + delta), then the
+// deltas are bit-packed at the minimum required width. Each block carries
+// a max-impact header used by Block-Max WAND for dynamic pruning.
+//
+// Production codecs (Lucene 8+, Tantivy) use SIMD-friendly bit-packing
+// with patched outliers. This module captures the algorithmic essentials
+// without the SIMD tuning.
+//
+// See concepts/pfor-delta-encoding.md for the codec rationale and
+// concepts/block-max-wand.md for how max-impact is used at query time.
+
+dependencies {
+    api project(':dse-common')
+}
