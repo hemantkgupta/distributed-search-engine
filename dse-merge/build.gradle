@@ -1,0 +1,16 @@
+// dse-merge — tiered segment merge with HNSW rebuild.
+//
+// Production engines under-throttled-merge accumulate tombstones and
+// HNSW unreachable points (the silent recall-drift failure mode). The
+// merge subsystem consolidates N small segments into one larger segment,
+// dropping tombstoned docs and rebuilding the HNSW graph from scratch
+// over the surviving doc-IDs — the canonical fix for the unreachable-
+// points problem.
+//
+// See concepts/hnsw-graph.md "Important to Know" and the
+// patterns/unified-lexical-vector-segment "Tiered merge" section.
+
+dependencies {
+    api project(':dse-common')
+    api project(':dse-segment')
+}

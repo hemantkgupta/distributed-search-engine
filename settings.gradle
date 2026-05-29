@@ -8,3 +8,14 @@ include 'dse-roaring'
 include 'dse-pfor'
 include 'dse-fst'
 include 'dse-inverted'
+
+// Phase 2 — Vector retrieval + unified segment
+include 'dse-hnsw'
+include 'dse-rrf'
+include 'dse-colbert'
+include 'dse-segment'
+include 'dse-merge'
+
+// Phase 3 — Distribution + ingest (planned)
+
+// Phase 4 — Ops + integration (planned)

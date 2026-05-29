@@ -1,0 +1,11 @@
+// dse-rrf — Reciprocal Rank Fusion.
+//
+// score(d) = Σᵢ 1/(k + rank_i(d))   with k=60 by convention.
+//
+// Used to fuse two (or more) ranked lists into a single ordering
+// without per-corpus calibration. Score-agnostic; uses only rank.
+// See concepts/reciprocal-rank-fusion.md.
+
+dependencies {
+    api project(':dse-common')
+}

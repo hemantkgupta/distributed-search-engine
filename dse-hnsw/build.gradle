@@ -1,0 +1,19 @@
+// dse-hnsw — vector retrieval module.
+//
+// Implements:
+// * ProductQuantizer: PQ32-style sub-vector encoding (96× compression),
+//   with ADC (Asymmetric Distance Computation) at query time.
+// * HnswGraph: single-layer beam-search proximity graph with greedy
+//   walk + bounded candidate heap. The hierarchical layering of the
+//   full HNSW is collapsed to L0 for pedagogical clarity.
+// * AclAwareWalker: HNSW traversal that accepts a Roaring ACL bitset
+//   and refuses to add unauthorised candidates while STILL traversing
+//   their neighbour links (the load-bearing recall-preserving detail).
+//
+// See concepts/{hnsw-graph,product-quantization}.md and
+// tradeoffs/pre-filter-vs-post-filter-acl.md.
+
+dependencies {
+    api project(':dse-common')
+    api project(':dse-roaring')
+}

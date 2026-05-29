@@ -1,0 +1,17 @@
+// dse-segment — the unified segment that co-locates inverted index,
+// HNSW vector graph, ColBERT token store, forward column store, and
+// tombstone bitmap on the same doc-ID space.
+//
+// This is the structural commitment of the unified-lexical-vector-segment
+// pattern: all four data structures live in one segment, are read on
+// one node, and share one doc-ID space. No cross-cluster joins.
+//
+// See patterns/unified-lexical-vector-segment.md.
+
+dependencies {
+    api project(':dse-common')
+    api project(':dse-inverted')
+    api project(':dse-hnsw')
+    api project(':dse-colbert')
+    api project(':dse-roaring')
+}

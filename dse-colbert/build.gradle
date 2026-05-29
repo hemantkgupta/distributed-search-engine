@@ -1,0 +1,15 @@
+// dse-colbert — simplified ColBERT-style late-interaction reranker.
+//
+// Each doc has a per-token vector array (pre-computed offline at index
+// time). At query time:
+//   score(q, d) = Σ_i max_j (q_i · d_j)
+//                          (MaxSim aggregation)
+//
+// Cross-encoder-class quality at 100× lower latency, because the doc
+// representations are stable and only the query needs encoding.
+//
+// See concepts/colbert-late-interaction.md.
+
+dependencies {
+    api project(':dse-common')
+}
