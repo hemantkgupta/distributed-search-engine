@@ -1,0 +1,23 @@
+// dse-shard — the content node.
+//
+// Runs the full per-shard retrieval pipeline:
+//   1. ACL bitset build from principal expansion
+//   2. Lexical first stage (BM25 + Block-Max WAND) with ACL pre-filter
+//   3. Vector first stage (PQ-HNSW) with ACL pre-filter
+//   4. RRF fusion of the two candidate lists
+//   5. ColBERT MaxSim rerank
+//   6. Top-K return to broker
+//
+// All inside the same memory space — no network hop between stages.
+// This is the structural payoff of the unified-segment architecture.
+
+dependencies {
+    api project(':dse-common')
+    api project(':dse-inverted')
+    api project(':dse-hnsw')
+    api project(':dse-colbert')
+    api project(':dse-rrf')
+    api project(':dse-segment')
+    api project(':dse-acl')
+    api project(':dse-roaring')
+}

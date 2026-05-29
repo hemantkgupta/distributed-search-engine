@@ -1,0 +1,16 @@
+// dse-indexer — CDC-driven document ingest pipeline.
+//
+// Consumes documents from an in-memory queue (a stand-in for Kafka),
+// builds up an in-RAM segment via SegmentBuilder, and flushes when
+// either the per-segment doc-count threshold or the per-segment time
+// threshold fires.
+//
+// In production this layer would also embed each doc via a GPU pipeline;
+// here the embedding is deterministically seeded from text for
+// reproducibility. See §8 of distributed-search-engine-full.
+
+dependencies {
+    api project(':dse-common')
+    api project(':dse-segment')
+    api project(':dse-hnsw')
+}

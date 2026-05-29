@@ -1,0 +1,15 @@
+// dse-broker — the stateless query coordinator.
+//
+// Fans out a query to all shards (or a Tier-1 subset), enforces per-shard
+// deadlines, merges top-K from shards via RRF, and emits partial results
+// if any shard times out.
+//
+// At 10 000-shard fan-out scale, per-shard timeouts + partial results
+// are not an optimisation — they are mandatory. The slowest shard would
+// otherwise stall every query. See systems/linkedin-galene.md.
+
+dependencies {
+    api project(':dse-common')
+    api project(':dse-rrf')
+    api project(':dse-shard')
+}

@@ -1,0 +1,15 @@
+// dse-acl — principal expansion + ACL bitset builder.
+//
+// At query time, the shard receives the user's expanded set of ACL
+// tokens (group memberships, role assignments, per-user grants).
+// It builds a Roaring bitmap of authorised doc-IDs by OR-ing the
+// posting lists corresponding to those tokens — co-located with
+// content terms in the same inverted index.
+//
+// See tradeoffs/pre-filter-vs-post-filter-acl.md.
+
+dependencies {
+    api project(':dse-common')
+    api project(':dse-inverted')
+    api project(':dse-roaring')
+}
